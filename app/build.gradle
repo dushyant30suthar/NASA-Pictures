@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -31,6 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
 }
 
 dependencies {
@@ -38,6 +42,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.databinding:databinding-runtime:7.0.2'
 
     /*
     Test dependencies. */
@@ -51,8 +56,15 @@ dependencies {
     /*
     Common Dependencies*/
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.google.dagger:dagger:${rootProject.ext.dagger2_vesion}"
-    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger2_vesion}"
+    /*
+    Dagger*/
+    implementation "com.google.dagger:dagger-android-support:${rootProject.ext.dagger_version}"
+    implementation "com.google.dagger:dagger:${rootProject.ext.dagger_version}"
+    implementation "com.google.dagger:dagger-android:${rootProject.ext.dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger_version}"
+    kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger_version}"
+
+
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxjava2_version}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxandroid_version}"
 
@@ -62,6 +74,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit2_version}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofit2_version}"
     implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttp3_version}"
+    implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logging_version"
     implementation "com.google.code.gson:gson:${rootProject.ext.gson_version}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit2_version}"
 
