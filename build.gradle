@@ -16,6 +16,9 @@ buildscript {
 
         androidx_version = '1.2.1'
         constraint_layout_version = '2.1.0'
+        navigation_version = '2.3.5'
+        paging_version = '3.0.1'
+        lifecycle_version = '2.2.0'
         retrofit2_version = "2.6.0"
         retrofit_logging_version = "4.8.0"
         okhttp3_version = "4.8.0"

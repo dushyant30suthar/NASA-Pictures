@@ -5,14 +5,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dushyant30suthar.cleanarchitecture.base.action.ActionPerformer
 
 
-abstract class BaseViewHolder<T, Actions>(itemView: View) : RecyclerView.ViewHolder(itemView) {
+abstract class BaseViewHolder<T, Action>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-    var actionPerformer: ActionPerformer<Actions>? = null
+    var actionPerformer: ActionPerformer<Action>? = null
 
     abstract fun bind(data: T, position: Int)
 
-    open fun performAction(action: Actions) {
+    open fun performAction(action: Action) {
         this.actionPerformer?.performAction(action)
     }
 

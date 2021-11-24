@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
-    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    abstract fun getCommonProperties(): HashMap<String, Any>?
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
         if (compositeDisposable.isDisposed.not())
