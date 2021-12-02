@@ -2,27 +2,24 @@ package com.dushyant30suthar.cleanarchitecture.base.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dushyant30suthar.cleanarchitecture.base.action.ActionPerformer
 import com.dushyant30suthar.cleanarchitecture.base.action.BaseAction
 import com.dushyant30suthar.cleanarchitecture.base.view.BaseViewHolder
 import com.dushyant30suthar.cleanarchitecture.base.view.RecyclerViewItem
 
 
-abstract class BaseAdapter(private val baseActionPerformer: ActionPerformer<out BaseAction>?) :
-    RecyclerView.Adapter<BaseViewHolder<in RecyclerViewItem, out BaseAction>>() {
-
-    val recyclerViewPool = RecyclerView.RecycledViewPool()
+abstract class BaseAdapter :
+    RecyclerView.Adapter<BaseViewHolder<in RecyclerViewItem, in BaseAction>>() {
 
     private val itemList = mutableListOf<RecyclerViewItem>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<in RecyclerViewItem, out BaseAction> {
-        return getViewHolder().apply { actionPerformer = baseActionPerformer }
+    ): BaseViewHolder<in RecyclerViewItem, in BaseAction> {
+        return getViewHolder()
     }
 
-    abstract fun getViewHolder(): BaseViewHolder<in RecyclerViewItem, out BaseAction>
+    abstract fun getViewHolder(): BaseViewHolder<in RecyclerViewItem, in BaseAction>
 
     override fun getItemCount(): Int = itemList.size
 
