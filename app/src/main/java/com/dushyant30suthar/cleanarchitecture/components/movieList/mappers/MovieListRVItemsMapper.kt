@@ -5,10 +5,10 @@ import com.dushyant30suthar.cleanarchitecture.base.view.RecyclerViewItem
 import javax.inject.Inject
 
 class MovieListRVItemsMapper @Inject constructor() :
-    Mapper<Any?, RecyclerViewItem> {
+    Mapper<Any?, List<RecyclerViewItem>> {
 
 
-    fun map(srcObject: Any?): List<RecyclerViewItem> {
+    override fun map(srcObject: Any?): List<RecyclerViewItem> {
         return mutableListOf()
     }
 

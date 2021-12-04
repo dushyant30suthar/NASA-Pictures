@@ -6,32 +6,33 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.*
+import com.dushyant30suthar.cleanarchitecture.base.BaseFragment
 import com.dushyant30suthar.cleanarchitecture.base.action.ActionPerformer
+import com.dushyant30suthar.cleanarchitecture.base.action.BaseAction
 import com.dushyant30suthar.cleanarchitecture.base.view.RecyclerViewItem
 import com.dushyant30suthar.cleanarchitecture.base.viewModel.getViewModel
 import com.dushyant30suthar.cleanarchitecture.components.movieList.actions.MovieListAction
 import com.dushyant30suthar.cleanarchitecture.components.movieList.adapter.MovieListAdapter
 import com.dushyant30suthar.cleanarchitecture.components.movieList.viewModel.MovieListViewModel
-import com.dushyant30suthar.cleanarchitecture.databinding.FragmentCrptoListBinding
+import com.dushyant30suthar.cleanarchitecture.databinding.FragmentMovieListBinding
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class MovieListFragment : Fragment(), ActionPerformer<MovieListAction> {
+class MovieListFragment : BaseFragment(), ActionPerformer<MovieListAction> {
 
     companion object {
         private val TAG: String = MovieListFragment::class.java.canonicalName
     }
 
-    private lateinit var binding: FragmentCrptoListBinding
+    private lateinit var binding: FragmentMovieListBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -148,7 +149,7 @@ class MovieListFragment : Fragment(), ActionPerformer<MovieListAction> {
 
     /*
     * BaseAction implementations. */
-    override fun performAction(action: MovieListAction) {
+    override fun performAction(action: BaseAction) {
         when (action) {
 
             is DownloadQRCodePdfAction -> {

@@ -8,18 +8,21 @@ import com.dushyant30suthar.cleanarchitecture.base.view.RecyclerViewItem
 
 
 abstract class BaseAdapter :
-    RecyclerView.Adapter<BaseViewHolder<in RecyclerViewItem, in BaseAction>>() {
+    RecyclerView.Adapter<BaseViewHolder<RecyclerViewItem, BaseAction>>() {
 
     private val itemList = mutableListOf<RecyclerViewItem>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<in RecyclerViewItem, in BaseAction> {
-        return getViewHolder()
+    ): BaseViewHolder<RecyclerViewItem, BaseAction> {
+        return getViewHolder(parent, viewType)
     }
 
-    abstract fun getViewHolder(): BaseViewHolder<in RecyclerViewItem, in BaseAction>
+    abstract fun getViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<RecyclerViewItem, BaseAction>
 
     override fun getItemCount(): Int = itemList.size
 
@@ -28,7 +31,7 @@ abstract class BaseAdapter :
     }
 
     override fun onBindViewHolder(
-        holder: BaseViewHolder<in RecyclerViewItem, in BaseAction>,
+        holder: BaseViewHolder<RecyclerViewItem, BaseAction>,
         position: Int
     ) {
         holder.bind(itemList[position], position)
@@ -53,12 +56,12 @@ abstract class BaseAdapter :
         notifyDataSetChanged()
     }
 
-    override fun onViewAttachedToWindow(holder: BaseViewHolder<in RecyclerViewItem, in BaseAction>) {
+    override fun onViewAttachedToWindow(holder: BaseViewHolder<RecyclerViewItem, BaseAction>) {
         super.onViewAttachedToWindow(holder)
         holder.startAnimation()
     }
 
-    override fun onViewDetachedFromWindow(holder: BaseViewHolder<in RecyclerViewItem, in BaseAction>) {
+    override fun onViewDetachedFromWindow(holder: BaseViewHolder<RecyclerViewItem, BaseAction>) {
         super.onViewDetachedFromWindow(holder)
         holder.stopAnimation()
     }
