@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.dushyant30suthar.cleanarchitecture.R
 import com.dushyant30suthar.cleanarchitecture.base.view.BaseViewHolder
+import com.dushyant30suthar.cleanarchitecture.components.movieList.actions.MovieListAction
 import com.dushyant30suthar.cleanarchitecture.components.movieList.viewHolder.MovieItemViewHolder
 
 
@@ -13,7 +14,7 @@ class MovieListViewHolderFactory {
     fun getViewHolderFor(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<*, *> {
+    ): BaseViewHolder<*, MovieListAction> {
         return when (viewType) {
 
             R.layout.item_movie ->

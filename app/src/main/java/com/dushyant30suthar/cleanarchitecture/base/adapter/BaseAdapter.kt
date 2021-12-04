@@ -2,27 +2,26 @@ package com.dushyant30suthar.cleanarchitecture.base.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dushyant30suthar.cleanarchitecture.base.action.BaseAction
 import com.dushyant30suthar.cleanarchitecture.base.view.BaseViewHolder
 import com.dushyant30suthar.cleanarchitecture.base.view.RecyclerViewItem
 
 
-abstract class BaseAdapter :
-    RecyclerView.Adapter<BaseViewHolder<RecyclerViewItem, BaseAction>>() {
+abstract class BaseAdapter<Action> :
+    RecyclerView.Adapter<BaseViewHolder<RecyclerViewItem, Action>>() {
 
     private val itemList = mutableListOf<RecyclerViewItem>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<RecyclerViewItem, BaseAction> {
+    ): BaseViewHolder<RecyclerViewItem, Action> {
         return getViewHolder(parent, viewType)
     }
 
     abstract fun getViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<RecyclerViewItem, BaseAction>
+    ): BaseViewHolder<RecyclerViewItem, Action>
 
     override fun getItemCount(): Int = itemList.size
 
@@ -31,7 +30,7 @@ abstract class BaseAdapter :
     }
 
     override fun onBindViewHolder(
-        holder: BaseViewHolder<RecyclerViewItem, BaseAction>,
+        holder: BaseViewHolder<RecyclerViewItem, Action>,
         position: Int
     ) {
         holder.bind(itemList[position], position)
@@ -56,12 +55,12 @@ abstract class BaseAdapter :
         notifyDataSetChanged()
     }
 
-    override fun onViewAttachedToWindow(holder: BaseViewHolder<RecyclerViewItem, BaseAction>) {
+    override fun onViewAttachedToWindow(holder: BaseViewHolder<RecyclerViewItem, Action>) {
         super.onViewAttachedToWindow(holder)
         holder.startAnimation()
     }
 
-    override fun onViewDetachedFromWindow(holder: BaseViewHolder<RecyclerViewItem, BaseAction>) {
+    override fun onViewDetachedFromWindow(holder: BaseViewHolder<RecyclerViewItem, Action>) {
         super.onViewDetachedFromWindow(holder)
         holder.stopAnimation()
     }

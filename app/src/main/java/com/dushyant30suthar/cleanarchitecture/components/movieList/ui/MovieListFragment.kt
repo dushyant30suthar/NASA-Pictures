@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.*
 import com.dushyant30suthar.cleanarchitecture.base.BaseFragment
 import com.dushyant30suthar.cleanarchitecture.base.action.ActionPerformer
-import com.dushyant30suthar.cleanarchitecture.base.action.BaseAction
 import com.dushyant30suthar.cleanarchitecture.base.view.RecyclerViewItem
 import com.dushyant30suthar.cleanarchitecture.base.viewModel.getViewModel
 import com.dushyant30suthar.cleanarchitecture.components.movieList.actions.MovieListAction
@@ -147,15 +146,7 @@ class MovieListFragment : BaseFragment(), ActionPerformer<MovieListAction> {
         }
     }
 
-    /*
-    * BaseAction implementations. */
-    override fun performAction(action: BaseAction) {
-        when (action) {
-
-            is DownloadQRCodePdfAction -> {
-                downloadFileFromURL(action.pdfUrl, action.title)
-            }
-
-        }
+    override fun performAction(action: MovieListAction) {
+        TODO("Not yet implemented")
     }
 }
