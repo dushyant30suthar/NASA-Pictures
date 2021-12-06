@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dushyant30suthar.cleanarchitecture.base.action.ActionPerformer
 
 
-abstract class BaseViewHolder<T, Action>(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+abstract class BaseViewHolder<T, Action>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     var actionPerformer: ActionPerformer<Action>? = null
