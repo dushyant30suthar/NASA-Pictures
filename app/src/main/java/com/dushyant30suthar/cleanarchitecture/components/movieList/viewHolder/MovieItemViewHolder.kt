@@ -1,15 +1,15 @@
 package com.dushyant30suthar.cleanarchitecture.components.movieList.viewHolder
 
 
+import android.view.View
 import com.dushyant30suthar.cleanarchitecture.base.view.BaseViewHolder
 import com.dushyant30suthar.cleanarchitecture.components.movieList.actions.MovieListAction
 import com.dushyant30suthar.cleanarchitecture.components.movieList.models.MovieModel
-import com.dushyant30suthar.cleanarchitecture.databinding.ItemMovieBinding
 
 
 class MovieItemViewHolder(
-    private val binding: ItemMovieBinding,
-) : BaseViewHolder<MovieModel, MovieListAction>(binding.root) {
+    private val binding: Any,
+) : BaseViewHolder<MovieModel, MovieListAction>(binding as View) {
 
 
     override fun bind(
@@ -17,7 +17,7 @@ class MovieItemViewHolder(
         position: Int,
     ) {
 
-        binding.executePendingBindings()
+
     }
 
 }
