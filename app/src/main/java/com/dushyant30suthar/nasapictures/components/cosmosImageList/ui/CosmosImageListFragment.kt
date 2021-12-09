@@ -18,7 +18,8 @@ import javax.inject.Inject
 class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListAction> {
 
     companion object {
-        private val TAG: String = CosmosImageListFragment::class.java.canonicalName
+        private val TAG: String =
+            CosmosImageListFragment::class.java.canonicalName ?: "UnknownClass"
     }
 
 
@@ -68,9 +69,10 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         super.onDestroy()
     }
 
+    /*
+    * Initial setup*/
     private fun setUpViews() {
         setHasOptionsMenu(true)
-
     }
 
     private fun setObservers() {

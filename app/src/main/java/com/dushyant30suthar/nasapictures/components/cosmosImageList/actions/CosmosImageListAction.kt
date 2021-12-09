@@ -1,3 +1,7 @@
 package com.dushyant30suthar.nasapictures.components.cosmosImageList.actions
 
-interface CosmosImageListAction
+import com.dushyant30suthar.nasapictures.base.action.BaseAction
+
+interface CosmosImageListAction : BaseAction
+
+class CosmosImageSelectedAction : CosmosImageListAction
