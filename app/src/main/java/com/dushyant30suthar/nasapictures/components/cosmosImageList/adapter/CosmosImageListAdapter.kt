@@ -5,22 +5,22 @@ import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.adapter.BaseAdapter
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.MovieListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
 
-class MovieListAdapter(val actionPerformer: ActionPerformer<MovieListAction>?) :
-    BaseAdapter<MovieListAction>() {
+class CosmosImageListAdapter(val actionPerformer: ActionPerformer<CosmosImageListAction>?) :
+    BaseAdapter<CosmosImageListAction>() {
 
-    private val movieListViewHolderFactory = MovieListViewHolderFactory()
+    private val movieListViewHolderFactory = CosmosImageListViewHolderFactory()
 
     override fun getViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<RecyclerViewItem, MovieListAction> {
+    ): BaseViewHolder<RecyclerViewItem, CosmosImageListAction> {
         return (movieListViewHolderFactory.getViewHolderFor(
             parent,
             viewType
-        ) as BaseViewHolder<RecyclerViewItem, MovieListAction>).apply {
-            actionPerformer = this@MovieListAdapter.actionPerformer
+        ) as BaseViewHolder<RecyclerViewItem, CosmosImageListAction>).apply {
+            actionPerformer = this@CosmosImageListAdapter.actionPerformer
         }
     }
 

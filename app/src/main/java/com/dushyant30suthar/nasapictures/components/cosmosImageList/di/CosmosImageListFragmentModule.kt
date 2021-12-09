@@ -1,10 +1,10 @@
 package com.dushyant30suthar.nasapictures.components.cosmosImageList.di
 
 import androidx.lifecycle.ViewModel
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.MovieListViewModel
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.CosmosImageListViewModel
 import com.dushyant30suthar.nasapictures.configuration.dagger.annotations.ViewModelKey
 import com.dushyant30suthar.nasapictures.configuration.dagger.scopes.PerFragment
-import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.MovieService
+import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.CosmosImageListService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -12,15 +12,15 @@ import dagger.multibindings.IntoMap
 import retrofit2.Retrofit
 
 @Module(
-    includes = [MovieListFragmentModule.MovieListFragmentProviderModule::class]
+    includes = [CosmosImageListFragmentModule.MovieListFragmentProviderModule::class]
 )
 
-abstract class MovieListFragmentModule {
+abstract class CosmosImageListFragmentModule {
     @Binds
     @IntoMap
-    @ViewModelKey(MovieListViewModel::class)
+    @ViewModelKey(CosmosImageListViewModel::class)
     @PerFragment
-    abstract fun bindMovieListViewModel(movieListViewModel: MovieListViewModel): ViewModel
+    abstract fun bindMovieListViewModel(cosmosImageListViewModel: CosmosImageListViewModel): ViewModel
 
 
     @Module
@@ -29,9 +29,9 @@ abstract class MovieListFragmentModule {
 
         @Provides
         @PerFragment
-        internal fun bindMovieService(retrofit: Retrofit): MovieService {
+        internal fun bindMovieService(retrofit: Retrofit): CosmosImageListService {
             return retrofit.create(
-                MovieService
+                CosmosImageListService
                 ::class.java
             )
         }

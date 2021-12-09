@@ -9,25 +9,25 @@ import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.viewModel.getViewModel
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.MovieListAction
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.MovieListAdapter
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.MovieListViewModel
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.CosmosImageListViewModel
 import javax.inject.Inject
 
 
-class MovieListFragment : BaseFragment(), ActionPerformer<MovieListAction> {
+class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListAction> {
 
     companion object {
-        private val TAG: String = MovieListFragment::class.java.canonicalName
+        private val TAG: String = CosmosImageListFragment::class.java.canonicalName
     }
 
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val movieListViewModel: MovieListViewModel by getViewModel(viewModelFactory)
+    private val cosmosImageListViewModel: CosmosImageListViewModel by getViewModel(viewModelFactory)
 
-    private val movieListAdapter: MovieListAdapter by lazy { MovieListAdapter(this) }
+    private val cosmosImageListAdapter: CosmosImageListAdapter by lazy { CosmosImageListAdapter(this) }
 
 
     override fun onCreateView(
@@ -77,7 +77,7 @@ class MovieListFragment : BaseFragment(), ActionPerformer<MovieListAction> {
 
     }
 
-    override fun performAction(action: MovieListAction) {
+    override fun performAction(action: CosmosImageListAction) {
 
     }
 }

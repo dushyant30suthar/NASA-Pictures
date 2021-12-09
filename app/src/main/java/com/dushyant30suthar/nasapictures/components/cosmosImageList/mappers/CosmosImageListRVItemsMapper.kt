@@ -4,7 +4,7 @@ import com.dushyant30suthar.nasapictures.base.mapper.Mapper
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import javax.inject.Inject
 
-class MovieListRVItemsMapper @Inject constructor() :
+class CosmosImageListRVItemsMapper @Inject constructor() :
     Mapper<Any?, List<RecyclerViewItem>> {
 
 

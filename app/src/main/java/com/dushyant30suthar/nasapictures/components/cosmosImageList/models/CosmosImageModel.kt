@@ -2,7 +2,7 @@ package com.dushyant30suthar.nasapictures.components.cosmosImageList.models
 
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 
-data class MovieModel(
+data class CosmosImageModel(
     val movieName: String,
     val releaseYear: String,
     val ratings: String,

@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.MovieListAction
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewHolder.MovieItemViewHolder
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewHolder.CosmosImageListItemViewHolder
 
 
-class MovieListViewHolderFactory {
+class CosmosImageListViewHolderFactory {
 
     fun getViewHolderFor(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<*, MovieListAction> {
+    ): BaseViewHolder<*, CosmosImageListAction> {
         return when (viewType) {
 
             R.layout.item_movie ->
-                MovieItemViewHolder(
+                CosmosImageListItemViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
                         R.layout.item_movie,
