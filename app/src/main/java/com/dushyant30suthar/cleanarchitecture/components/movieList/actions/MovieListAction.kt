@@ -1,3 +1,0 @@
-package com.dushyant30suthar.cleanarchitecture.components.movieList.actions
-
-interface MovieListAction

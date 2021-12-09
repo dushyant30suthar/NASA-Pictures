@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dushyant30suthar.cleanarchitecture">
+    package="com.dushyant30suthar.nasapictures">
 
     <application
-        android:name=".base.Application"
+        android:name="com.dushyant30suthar.nasapictures.base.Application"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CleanArchitecture">
         <activity
-            android:name=".components.MainActivity"
+            android:name="com.dushyant30suthar.nasapictures.components.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
