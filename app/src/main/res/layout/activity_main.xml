@@ -32,6 +32,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="0dp" />
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mainActivityToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:title="@string/app_name"
+        app:layout_constraintEnd_toEndOf="@id/vRGuideline"
+        app:layout_constraintStart_toStartOf="@id/vLGuideline"
+        app:layout_constraintTop_toTopOf="@id/hTGuideline"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/NasaAppToolbarTitle" />
+
     <fragment
         android:id="@+id/mainActivityNavHostFragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -41,7 +52,7 @@
         app:layout_constraintBottom_toTopOf="@id/hBGuideline"
         app:layout_constraintEnd_toEndOf="@id/vRGuideline"
         app:layout_constraintStart_toStartOf="@id/vLGuideline"
-        app:layout_constraintTop_toTopOf="@id/hTGuideline" />
+        app:layout_constraintTop_toBottomOf="@+id/mainActivityToolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

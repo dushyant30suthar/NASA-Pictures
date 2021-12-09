@@ -26,7 +26,7 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val cosmosImageListViewModel: CosmosImageListViewModel by getViewModel(viewModelFactory)
+    private lateinit var cosmosImageListViewModel: CosmosImageListViewModel
 
     private val cosmosImageListAdapter: CosmosImageListAdapter by lazy { CosmosImageListAdapter(this) }
 
@@ -36,11 +36,13 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
+        return inflater.inflate(R.layout.fragment_cosmos_image_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val cosmosImageListViewModel: CosmosImageListViewModel by getViewModel(viewModelFactory)
+        this.cosmosImageListViewModel = cosmosImageListViewModel
         setUpViews()
     }
 

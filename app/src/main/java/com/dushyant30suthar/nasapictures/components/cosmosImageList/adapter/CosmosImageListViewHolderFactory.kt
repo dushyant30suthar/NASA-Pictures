@@ -17,11 +17,11 @@ class CosmosImageListViewHolderFactory {
     ): BaseViewHolder<*, CosmosImageListAction> {
         return when (viewType) {
 
-            R.layout.item_movie ->
+            R.layout.item_cosmos_image ->
                 CosmosImageListItemViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
-                        R.layout.item_movie,
+                        R.layout.item_cosmos_image,
                         parent,
                         false
                     )

@@ -12,7 +12,7 @@ import dagger.multibindings.IntoMap
 import retrofit2.Retrofit
 
 @Module(
-    includes = [CosmosImageListFragmentModule.MovieListFragmentProviderModule::class]
+    includes = [CosmosImageListFragmentModule.CosmosImageListFragmentProviderModule::class]
 )
 
 abstract class CosmosImageListFragmentModule {
@@ -24,8 +24,7 @@ abstract class CosmosImageListFragmentModule {
 
 
     @Module
-    object MovieListFragmentProviderModule {
-
+    object CosmosImageListFragmentProviderModule {
 
         @Provides
         @PerFragment
