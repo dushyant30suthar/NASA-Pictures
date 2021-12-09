@@ -1,11 +1,11 @@
-package com.dushyant30suthar.nasapictures.components.movieList.adapter
+package com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter
 
 import android.view.ViewGroup
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.adapter.BaseAdapter
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
-import com.dushyant30suthar.nasapictures.components.movieList.actions.MovieListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.MovieListAction
 
 class MovieListAdapter(val actionPerformer: ActionPerformer<MovieListAction>?) :
     BaseAdapter<MovieListAction>() {

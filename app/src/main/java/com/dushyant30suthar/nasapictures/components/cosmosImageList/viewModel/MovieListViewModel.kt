@@ -1,8 +1,8 @@
-package com.dushyant30suthar.nasapictures.components.movieList.viewModel
+package com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel
 
 import com.dushyant30suthar.nasapictures.base.viewModel.BaseViewModel
-import com.dushyant30suthar.nasapictures.components.movieList.mappers.MovieListRVItemsMapper
-import com.dushyant30suthar.nasapictures.domain.movieList.useCases.GetMovieListUseCase
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers.MovieListRVItemsMapper
+import com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases.GetMovieListUseCase
 import javax.inject.Inject
 
 class MovieListViewModel @Inject constructor(

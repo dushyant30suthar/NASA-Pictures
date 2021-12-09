@@ -1,10 +1,10 @@
-package com.dushyant30suthar.nasapictures.components.movieList.di
+package com.dushyant30suthar.nasapictures.components.cosmosImageList.di
 
 import androidx.lifecycle.ViewModel
-import com.dushyant30suthar.nasapictures.components.movieList.viewModel.MovieListViewModel
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.MovieListViewModel
 import com.dushyant30suthar.nasapictures.configuration.dagger.annotations.ViewModelKey
 import com.dushyant30suthar.nasapictures.configuration.dagger.scopes.PerFragment
-import com.dushyant30suthar.nasapictures.data.movie.services.MovieService
+import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.MovieService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

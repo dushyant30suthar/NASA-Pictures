@@ -1,4 +1,4 @@
-package com.dushyant30suthar.nasapictures.components.movieList.ui
+package com.dushyant30suthar.nasapictures.components.cosmosImageList.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.viewModel.getViewModel
-import com.dushyant30suthar.nasapictures.components.movieList.actions.MovieListAction
-import com.dushyant30suthar.nasapictures.components.movieList.adapter.MovieListAdapter
-import com.dushyant30suthar.nasapictures.components.movieList.viewModel.MovieListViewModel
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.MovieListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.MovieListAdapter
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.MovieListViewModel
 import javax.inject.Inject
 
 

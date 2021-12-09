@@ -1,0 +1,3 @@
+package com.dushyant30suthar.nasapictures.components.cosmosImageList.actions
+
+interface MovieListAction

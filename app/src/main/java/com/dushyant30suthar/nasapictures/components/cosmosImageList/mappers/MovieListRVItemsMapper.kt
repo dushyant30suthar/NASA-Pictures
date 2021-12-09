@@ -1,4 +1,4 @@
-package com.dushyant30suthar.nasapictures.components.movieList.mappers
+package com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers
 
 import com.dushyant30suthar.nasapictures.base.mapper.Mapper
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
