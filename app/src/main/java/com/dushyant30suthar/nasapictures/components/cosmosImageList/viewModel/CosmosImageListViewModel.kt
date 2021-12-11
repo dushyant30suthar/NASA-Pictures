@@ -3,10 +3,13 @@ package com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dushyant30suthar.nasapictures.base.liveData.Outcome
+import com.dushyant30suthar.nasapictures.base.rx.applyIoToMainSchedulerOnSingle
+import com.dushyant30suthar.nasapictures.base.rx.subscribeToSingle
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.base.viewModel.BaseViewModel
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers.CosmosImageListRVItemsMapper
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
+import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases.GetCosmosImageListUseCase
 import javax.inject.Inject
 
@@ -37,7 +40,29 @@ class CosmosImageListViewModel @Inject constructor(
    * Manipulated data i.e. data which is being operated by user or being interacted with.
    *
    * If user edits name of image title and haven't saved the data yet.*/
-    val editedCosmosImageList: List<CosmosImageModel> = mutableListOf()
+    private val editedCosmosImageList: MutableList<CosmosImageModel> = mutableListOf()
 
-    
+
+    fun getCosmosImageList() {
+        _cosmosImageListRVLiveData.value = Outcome.loading(true)
+        compositeDisposable.add(
+            getCosmosImageListUseCase.execute(Unit)
+                .applyIoToMainSchedulerOnSingle()
+                .subscribeToSingle(this::onCosmosImageListSuccess, this::onCosmosImageListError)
+        )
+    }
+
+    private fun onCosmosImageListSuccess(it: List<CosmosImageEntity>) {
+        originalCosmosImageList = cosmosImageListRVItemsMapper.map(it)
+        editedCosmosImageList.clear()
+        editedCosmosImageList.addAll(originalCosmosImageList!!.map { it.copy() })
+        _cosmosImageListRVLiveData.value = Outcome.loading(false)
+        _cosmosImageListRVLiveData.value = Outcome.success(editedCosmosImageList)
+    }
+
+    private fun onCosmosImageListError(e: Throwable) {
+        _cosmosImageListRVLiveData.value = Outcome.loading(false)
+        _cosmosImageListRVLiveData.value = Outcome.apiError(e)
+    }
+
 }
