@@ -1,7 +1,12 @@
 package com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.dushyant30suthar.nasapictures.base.liveData.Outcome
+import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.base.viewModel.BaseViewModel
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers.CosmosImageListRVItemsMapper
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases.GetCosmosImageListUseCase
 import javax.inject.Inject
 
@@ -10,5 +15,29 @@ class CosmosImageListViewModel @Inject constructor(
     private val cosmosImageListRVItemsMapper: CosmosImageListRVItemsMapper
 ) : BaseViewModel() {
 
+    /*
+    * Shows items in recycler view. Consisting of all types of viewHolders to be presented in the recyclerView.
+    *
+    * We do not store user's interacted data on this object. It's just a representation of what's showing.*/
+    private val _cosmosImageListRVLiveData: MutableLiveData<Outcome<List<RecyclerViewItem>>> =
+        MutableLiveData()
+    val cosmosImageListRVLiveData: LiveData<Outcome<List<RecyclerViewItem>>>
+        get() = _cosmosImageListRVLiveData
 
+
+    /*
+   * Original data we got from api. Not manipulated. In case we manipulate some data we can restore
+   * to original data through the references added below.
+   *
+   * It would be null in case our network request doesn't get succeed. */
+    private var originalCosmosImageList: List<CosmosImageModel>? = null
+
+
+    /*
+   * Manipulated data i.e. data which is being operated by user or being interacted with.
+   *
+   * If user edits name of image title and haven't saved the data yet.*/
+    val editedCosmosImageList: List<CosmosImageModel> = mutableListOf()
+
+    
 }
