@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
+import com.dushyant30suthar.nasapictures.base.liveData.observeK
+import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.base.viewModel.getViewModel
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
@@ -61,7 +63,10 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
 
     override fun onStart() {
         super.onStart()
+
         setObservers()
+
+        cosmosImageListViewModel.getCosmosImageList()
     }
 
     override fun onResume() {
@@ -87,10 +92,28 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     }
 
     private fun setObservers() {
-
+        cosmosImageListViewModel.cosmosImageListRVLiveData.observeK(
+            viewLifecycleOwner,
+            this::onCosmosImageListSuccess,
+            this::onCosmosImageListError,
+            this::onCosmosImageListProgressChanged
+        )
     }
 
     override fun performAction(action: CosmosImageListAction) {
 
     }
+
+    private fun onCosmosImageListSuccess(cosmosImageList: List<RecyclerViewItem>) {
+        cosmosImageListAdapter.setItems(cosmosImageList)
+    }
+
+    private fun onCosmosImageListError(throwable: Throwable) {
+
+    }
+
+    private fun onCosmosImageListProgressChanged(isInProgress: Boolean) {
+
+    }
+
 }

@@ -5,11 +5,20 @@ import androidx.fragment.app.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
+/*
+* Extension methods to getViewModels*/
+
 inline fun <reified VM : ViewModel> FragmentActivity.getViewModel(
     provider: ViewModelProvider.Factory
 ) = viewModels<VM> { provider }
 
 
+/*
+* Models to get from Fragment.
+*
+* It's own viewModel
+* It's parent's viewModel
+* Activity's viewModel to which it is attached to.*/
 inline fun <reified VM : ViewModel> Fragment.getViewModel(
     provider: ViewModelProvider.Factory
 ) = viewModels<VM> { provider }
