@@ -11,7 +11,7 @@ data class CosmosImageEntity(
     @SerializedName("media_type")
     val mediaType: String = "",
     @SerializedName("hdurl")
-    val hdurl: String = "",
+    val hdUrl: String = "",
     @SerializedName("service_version")
     val serviceVersion: String = "",
     @SerializedName("explanation")
