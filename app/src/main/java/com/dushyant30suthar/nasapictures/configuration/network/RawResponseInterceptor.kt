@@ -11,6 +11,8 @@ import java.io.BufferedReader
 import java.io.IOException
 
 
+/*
+* Interceptor file to be added in okHttpClient to return local version of data instead of getting from the network. */
 class RawResponseInterceptor(private val mContext: Context) : Interceptor {
 
     private var mContentType = "application/json"
