@@ -77,6 +77,12 @@ sealed class LoadState private constructor(
         constructor(@LayoutRes layout: Int, counts: Int? = null) : super(layout, counts ?: 1)
 
         constructor() : super(null, 0)
+
+        /*
+    * If you are providing Data then you should also be providing viewHolder
+    * for the same. Like in your viewHolder Factory or just return it through
+    * implemented method.*/
+        constructor(loadStateItems: RecyclerViewItem) : super(loadStateItems)
     }
 
     class Initialized : LoadState {

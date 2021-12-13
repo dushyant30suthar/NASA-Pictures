@@ -7,6 +7,7 @@ import com.dushyant30suthar.nasapictures.base.rx.applyIoToMainSchedulerOnSingle
 import com.dushyant30suthar.nasapictures.base.rx.subscribeToSingle
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.base.viewModel.BaseViewModel
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers.CosmosImageListErrorMapper
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers.CosmosImageListRVItemsMapper
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 class CosmosImageListViewModel @Inject constructor(
     private val getCosmosImageListUseCase: GetCosmosImageListUseCase,
-    private val cosmosImageListRVItemsMapper: CosmosImageListRVItemsMapper
+    private val cosmosImageListRVItemsMapper: CosmosImageListRVItemsMapper,
+    private val cosmosImageListErrorMapper: CosmosImageListErrorMapper,
 ) : BaseViewModel() {
 
     /*
@@ -64,7 +66,7 @@ class CosmosImageListViewModel @Inject constructor(
 
     private fun onCosmosImageListError(e: Throwable) {
         _cosmosImageListRVLiveData.value = Outcome.loading(false)
-        _cosmosImageListRVLiveData.value = Outcome.apiError(e)
+        _cosmosImageListRVLiveData.value = Outcome.apiError(cosmosImageListErrorMapper.map(e))
     }
 
 }

@@ -6,12 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
+import com.dushyant30suthar.nasapictures.base.adapter.ViewHolderFactory
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 
 class LoadStateAdapter<T : BaseViewHolder<RecyclerViewItem, Action>, Action>(
     private val actionPerformer: ActionPerformer<Action>,
-    private val getViewHolderFor: ((parent: ViewGroup, viewType: Int) -> T)?
+    private val viewHolderFactory: ViewHolderFactory<Action>
 ) : RecyclerView.Adapter<T>() {
 
     private val loadStateItems = mutableListOf<RecyclerViewItem>()
@@ -54,10 +55,8 @@ class LoadStateAdapter<T : BaseViewHolder<RecyclerViewItem, Action>, Action>(
         viewType: Int,
     ): T {
         return try {
-            getViewHolderFor?.let {
-                it(parent, viewType)
-            }.apply { this?.actionPerformer = this@LoadStateAdapter.actionPerformer }
-                ?: getDefaultViewHolder(parent, viewType)
+            (viewHolderFactory.getViewHolderFor(parent, viewType)
+                .apply { this.actionPerformer = this@LoadStateAdapter.actionPerformer }) as T
         } catch (exception: IllegalStateException) {
             getDefaultViewHolder(parent, viewType)
         }
@@ -87,11 +86,11 @@ class LoadStateAdapter<T : BaseViewHolder<RecyclerViewItem, Action>, Action>(
 
     fun attachLoadingStatesWithAdapter(
         adapter: RecyclerView.Adapter<T>,
-        loadStateLayoutPosition: LoadStateLayoutPosition
+        loadStateLayoutPosition: LoadStateAdapter.LoadStateLayoutPosition
     ): ConcatAdapter {
         return when (loadStateLayoutPosition) {
-            LoadStateLayoutPosition.TOP_OR_CENTER -> ConcatAdapter(this, adapter)
-            LoadStateLayoutPosition.BOTTOM -> ConcatAdapter(adapter, this)
+            LoadStateAdapter.LoadStateLayoutPosition.TOP_OR_CENTER -> ConcatAdapter(this, adapter)
+            LoadStateAdapter.LoadStateLayoutPosition.BOTTOM -> ConcatAdapter(adapter, this)
         }
     }
 }

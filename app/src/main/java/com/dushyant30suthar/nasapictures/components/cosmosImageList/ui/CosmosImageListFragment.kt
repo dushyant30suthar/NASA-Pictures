@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.liveData.observeK
@@ -13,7 +15,10 @@ import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.base.viewModel.getViewModel
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListViewHolderFactory
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.CosmosImageListViewModel
+import com.dushyant30suthar.nasapictures.components.loadState.LoadState
+import com.dushyant30suthar.nasapictures.components.loadState.LoadStateAdapter
 import com.dushyant30suthar.nasapictures.databinding.FragmentCosmosImageListBinding
 import javax.inject.Inject
 
@@ -30,7 +35,28 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
 
     private lateinit var cosmosImageListViewModel: CosmosImageListViewModel
 
-    private val cosmosImageListAdapter: CosmosImageListAdapter by lazy { CosmosImageListAdapter(this) }
+    private val cosmosImageListViewHolderFactory = CosmosImageListViewHolderFactory()
+
+    private val cosmosImageListAdapter: CosmosImageListAdapter by lazy {
+        CosmosImageListAdapter(
+            this,
+            cosmosImageListViewHolderFactory
+        )
+    }
+
+    private val cosmosImageListLoadStateAdapter by lazy {
+        LoadStateAdapter(
+            this,
+            cosmosImageListViewHolderFactory
+        )
+    }
+
+    private val concatenatedCosmosImageListAndLoadStateAdapter: ConcatAdapter by lazy {
+        cosmosImageListLoadStateAdapter.attachLoadingStatesWithAdapter(
+            cosmosImageListAdapter,
+            LoadStateAdapter.LoadStateLayoutPosition.TOP_OR_CENTER
+        )
+    }
 
     private lateinit var binding: FragmentCosmosImageListBinding
 
@@ -51,8 +77,8 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         val cosmosImageListViewModel: CosmosImageListViewModel by getViewModel(viewModelFactory)
         this.cosmosImageListViewModel = cosmosImageListViewModel
 
-        binding.cosmosImageListRV.adapter = cosmosImageListAdapter
-        binding.cosmosImageListRV.layoutManager = LinearLayoutManager(activity)
+        binding.cosmosImageListRV.adapter = concatenatedCosmosImageListAndLoadStateAdapter
+        binding.cosmosImageListRV.layoutManager = GridLayoutManager(activity, 2)
 
         setUpViews()
     }
@@ -101,19 +127,31 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     }
 
     override fun performAction(action: CosmosImageListAction) {
-
     }
 
     private fun onCosmosImageListSuccess(cosmosImageList: List<RecyclerViewItem>) {
         cosmosImageListAdapter.setItems(cosmosImageList)
     }
 
-    private fun onCosmosImageListError(throwable: Throwable) {
-
+    private fun onCosmosImageListError(errorItem: RecyclerViewItem?) {
+        if (errorItem != null) {
+            /*
+            * Known Error. */
+            cosmosImageListLoadStateAdapter.loadState =
+                LoadState.Error(errorItem)
+        } else {
+            /*
+            * Unknown Error.*/
+            cosmosImageListLoadStateAdapter.loadState =
+                LoadState.Error(R.layout.layout_error_cosmos_image_list)
+        }
     }
 
     private fun onCosmosImageListProgressChanged(isInProgress: Boolean) {
-
+        if (isInProgress) {
+            cosmosImageListLoadStateAdapter.loadState =
+                LoadState.Loading(R.layout.item_loading_cosmos_image, 16)
+        }
     }
 
 }

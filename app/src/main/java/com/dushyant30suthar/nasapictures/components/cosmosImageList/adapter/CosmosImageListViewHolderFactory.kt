@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.dushyant30suthar.nasapictures.R
+import com.dushyant30suthar.nasapictures.base.adapter.ViewHolderFactory
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewHolder.CosmosImageListItemViewHolder
 
 
-class CosmosImageListViewHolderFactory {
+class CosmosImageListViewHolderFactory : ViewHolderFactory<CosmosImageListAction> {
 
-    fun getViewHolderFor(
+    override fun getViewHolderFor(
         parent: ViewGroup,
         viewType: Int
     ): BaseViewHolder<*, CosmosImageListAction> {
