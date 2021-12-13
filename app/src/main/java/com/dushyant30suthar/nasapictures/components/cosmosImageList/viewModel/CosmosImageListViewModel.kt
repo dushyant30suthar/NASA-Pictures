@@ -12,7 +12,6 @@ import com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers.Cosm
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases.GetCosmosImageListUseCase
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class CosmosImageListViewModel @Inject constructor(
@@ -51,7 +50,6 @@ class CosmosImageListViewModel @Inject constructor(
         compositeDisposable.add(
             getCosmosImageListUseCase.execute(Unit)
                 .applyIoToMainSchedulerOnSingle()
-                .delay(3, TimeUnit.SECONDS)
                 .subscribeToSingle(this::onCosmosImageListSuccess, this::onCosmosImageListError)
         )
     }

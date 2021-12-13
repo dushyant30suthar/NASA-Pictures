@@ -149,8 +149,8 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
 
     private fun onCosmosImageListProgressChanged(isInProgress: Boolean) {
         if (isInProgress) {
-            cosmosImageListLoadStateAdapter.loadState =
-                LoadState.Loading(R.layout.item_loading_cosmos_image, 16)
+            /* cosmosImageListLoadStateAdapter.loadState =
+                 LoadState.Loading(R.layout.item_loading_cosmos_image, 16)*/
         }
     }
 

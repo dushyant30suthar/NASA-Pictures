@@ -1,9 +1,13 @@
 package com.dushyant30suthar.nasapictures.base.viewModel
 
+import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 /*
 * Extension methods to getViewModels*/
@@ -35,3 +39,23 @@ inline fun <reified VM : ViewModel> Fragment.getParentViewModel(
     VM::class, { requireParentFragment().viewModelStore },
     { provider }
 )
+
+fun ImageView.loadImage(
+    url: String?,
+    @DrawableRes placeholder: Int? = null,
+    @DrawableRes errorDrawable: Int? = null
+) {
+    Glide.with(this)
+        .load(url)
+        .also { glide ->
+            val requestOptions = RequestOptions()
+            placeholder?.also { drawable ->
+                requestOptions.placeholder(drawable)
+            }
+            errorDrawable?.let { errorDrawable ->
+                requestOptions.error(errorDrawable)
+            }
+            glide.apply(requestOptions)
+
+        }.into(this)
+}
