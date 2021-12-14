@@ -10,6 +10,9 @@ import com.dushyant30suthar.nasapictures.base.adapter.ViewHolderFactory
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 
+/*
+* Adapter to be used with another adapter to present loadingState of
+* data in the list.*/
 class LoadStateAdapter<T : BaseViewHolder<RecyclerViewItem, Action>, Action>(
     private val actionPerformer: ActionPerformer<Action>,
     private val viewHolderFactory: ViewHolderFactory<Action>

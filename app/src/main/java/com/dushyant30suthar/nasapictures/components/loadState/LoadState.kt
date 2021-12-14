@@ -3,6 +3,9 @@ package com.dushyant30suthar.nasapictures.components.loadState
 import androidx.annotation.LayoutRes
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 
+/*
+* Represents loadingState of list. And according to which different kinds of
+* loading/error/emptyList*/
 sealed class LoadState private constructor(
     @LayoutRes private val layout: Int?,
     private val counts: Int,
@@ -18,7 +21,6 @@ sealed class LoadState private constructor(
 
     val loadStateItems: List<RecyclerViewItem>
         get() {
-            1
             return if (_loadStateItem != null) {
                 listOf(_loadStateItem)
             } else {
