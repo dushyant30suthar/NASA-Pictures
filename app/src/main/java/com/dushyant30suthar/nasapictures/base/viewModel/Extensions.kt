@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dushyant30suthar.nasapictures.R
 
 /*
 * Extension methods to getViewModels*/
@@ -42,8 +43,8 @@ inline fun <reified VM : ViewModel> Fragment.getParentViewModel(
 
 fun ImageView.loadImage(
     url: String?,
-    @DrawableRes placeholder: Int? = null,
-    @DrawableRes errorDrawable: Int? = null
+    @DrawableRes placeholder: Int? = R.drawable.loading,
+    @DrawableRes errorDrawable: Int? = R.drawable.error
 ) {
     Glide.with(this)
         .load(url)
