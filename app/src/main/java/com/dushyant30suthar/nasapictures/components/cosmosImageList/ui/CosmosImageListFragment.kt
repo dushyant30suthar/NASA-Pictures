@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
@@ -79,8 +78,7 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         this.cosmosImageListViewModel = cosmosImageListViewModel
 
         binding.cosmosImageListRV.adapter = concatenatedCosmosImageListAndLoadStateAdapter
-        binding.cosmosImageListRV.layoutManager =
-            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding.cosmosImageListRV.layoutManager = GridLayoutManager(activity, 2)
 
         setUpViews()
     }
@@ -132,7 +130,10 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     }
 
     private fun onCosmosImageListSuccess(cosmosImageList: List<RecyclerViewItem>) {
+        cosmosImageListLoadStateAdapter.loadState = LoadState.Success.HasItems()
         cosmosImageListAdapter.setItems(cosmosImageList)
+        concatenatedCosmosImageListAndLoadStateAdapter.notifyDataSetChanged()
+        binding.cosmosImageListRV.scrollToPosition(0)
     }
 
     private fun onCosmosImageListError(errorItem: RecyclerViewItem?) {
@@ -151,8 +152,8 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
 
     private fun onCosmosImageListProgressChanged(isInProgress: Boolean) {
         if (isInProgress) {
-            /* cosmosImageListLoadStateAdapter.loadState =
-                 LoadState.Loading(R.layout.item_loading_cosmos_image, 16)*/
+            cosmosImageListLoadStateAdapter.loadState =
+                LoadState.Loading(R.layout.item_loading_cosmos_image, 16)
         }
     }
 

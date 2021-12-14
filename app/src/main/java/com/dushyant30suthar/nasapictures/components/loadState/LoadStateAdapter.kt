@@ -57,7 +57,7 @@ class LoadStateAdapter<T : BaseViewHolder<RecyclerViewItem, Action>, Action>(
         return try {
             (viewHolderFactory.getViewHolderFor(parent, viewType)
                 .apply { this.actionPerformer = this@LoadStateAdapter.actionPerformer }) as T
-        } catch (exception: IllegalStateException) {
+        } catch (exception: Exception) {
             getDefaultViewHolder(parent, viewType)
         }
     }
