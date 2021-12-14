@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
@@ -78,7 +79,8 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         this.cosmosImageListViewModel = cosmosImageListViewModel
 
         binding.cosmosImageListRV.adapter = concatenatedCosmosImageListAndLoadStateAdapter
-        binding.cosmosImageListRV.layoutManager = GridLayoutManager(activity, 2)
+        binding.cosmosImageListRV.layoutManager =
+            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
 
         setUpViews()
     }
