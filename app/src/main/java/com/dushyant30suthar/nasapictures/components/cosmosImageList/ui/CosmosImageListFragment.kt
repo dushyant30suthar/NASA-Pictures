@@ -77,9 +77,6 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         val cosmosImageListViewModel: CosmosImageListViewModel by getViewModel(viewModelFactory)
         this.cosmosImageListViewModel = cosmosImageListViewModel
 
-        binding.cosmosImageListRV.adapter = concatenatedCosmosImageListAndLoadStateAdapter
-        binding.cosmosImageListRV.layoutManager = GridLayoutManager(activity, 2)
-
         setUpViews()
     }
 
@@ -114,7 +111,9 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     /*
     * Initial setup*/
     private fun setUpViews() {
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(false)
+        binding.cosmosImageListRV.adapter = concatenatedCosmosImageListAndLoadStateAdapter
+        binding.cosmosImageListRV.layoutManager = GridLayoutManager(activity, 2)
     }
 
     private fun setObservers() {
