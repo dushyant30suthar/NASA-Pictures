@@ -22,7 +22,7 @@ class CosmosImageDetailsItemViewHolder(
         binding.cosmosImageTitleTV.text = data.imageTitle
         binding.cosmosImageDateTV.text = data.date
         binding.cosmosImageDetailsTV.text = data.imageDescription
-
+        binding.rootScrollView.scrollTo(0, 0)
         binding.executePendingBindings()
     }
 
