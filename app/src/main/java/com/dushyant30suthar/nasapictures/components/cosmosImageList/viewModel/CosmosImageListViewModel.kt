@@ -15,6 +15,8 @@ import com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases.GetCosm
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/*
+* This viewModel is shared among whole navGraph so that we don't have to execute network requests again and again.*/
 class CosmosImageListViewModel @Inject constructor(
     private val getCosmosImageListUseCase: GetCosmosImageListUseCase,
     private val cosmosImageListRVItemsMapper: CosmosImageListRVItemsMapper,
@@ -48,6 +50,13 @@ class CosmosImageListViewModel @Inject constructor(
 
     fun getCosmosImageList() {
         _cosmosImageListRVLiveData.value = Outcome.loading(true)
+        /*
+        * Do not execute request if you already have data.  */
+        if (originalCosmosImageList != null) {
+            _cosmosImageListRVLiveData.value = Outcome.loading(false)
+            _cosmosImageListRVLiveData.value = Outcome.success(editedCosmosImageList)
+            return
+        }
         compositeDisposable.add(
             getCosmosImageListUseCase.execute(Unit)
                 .delay(2, TimeUnit.SECONDS)

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/cosmosImageListFragment"
         android:name="com.dushyant30suthar.nasapictures.components.cosmosImageList.ui.CosmosImageListFragment"
-        android:label="CosmosImageListFragment">
+        android:label="Cosmos Grid">
         <action
             android:id="@+id/action_cosmosImageListFragment_to_cosmosImageDetailsFragment"
             app:destination="@id/cosmosImageDetailsFragment" />
@@ -15,5 +15,5 @@
     <fragment
         android:id="@+id/cosmosImageDetailsFragment"
         android:name="com.dushyant30suthar.nasapictures.components.cosmosImageDetails.ui.CosmosImageDetailsFragment"
-        android:label="CosmosImageDetailsFragment" />
+        android:label="Cosmos Details" />
 </navigation>

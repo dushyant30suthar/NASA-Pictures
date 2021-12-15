@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.liveData.observeK
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
-import com.dushyant30suthar.nasapictures.base.viewModel.getViewModel
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageSelectedAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
@@ -76,7 +77,7 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cosmosImageListViewModel: CosmosImageListViewModel by getViewModel(viewModelFactory)
+        val cosmosImageListViewModel: CosmosImageListViewModel by navGraphViewModels(R.id.navigation_cosmos) { viewModelFactory }
         this.cosmosImageListViewModel = cosmosImageListViewModel
 
         setUpViews()
@@ -89,9 +90,8 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     override fun onStart() {
         super.onStart()
 
-        setObservers()
-
         cosmosImageListViewModel.getCosmosImageList()
+        setObservers()
     }
 
     override fun onResume() {
@@ -114,6 +114,8 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     * Initial setup*/
     private fun setUpViews() {
         setHasOptionsMenu(false)
+        cosmosImageListAdapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.cosmosImageListRV.adapter = concatenatedCosmosImageListAndLoadStateAdapter
         binding.cosmosImageListRV.layoutManager = GridLayoutManager(activity, 2)
     }
@@ -139,7 +141,6 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
         cosmosImageListLoadStateAdapter.loadState = LoadState.Success.HasItems()
         cosmosImageListAdapter.setItems(cosmosImageList)
         concatenatedCosmosImageListAndLoadStateAdapter.notifyDataSetChanged()
-        binding.cosmosImageListRV.scrollToPosition(0)
     }
 
     private fun onCosmosImageListError(errorItem: RecyclerViewItem?) {
