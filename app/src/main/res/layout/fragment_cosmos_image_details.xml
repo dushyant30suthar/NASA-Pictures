@@ -1,11 +1,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <data>
 
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,18 +37,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="0dp" />
 
-        <TextView
-            android:id="@+id/unknownErrorMessageTV"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cosmosImageListRV"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="Something went wrong"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/hBGuideline"
             app:layout_constraintEnd_toEndOf="@id/vRGuideline"
             app:layout_constraintStart_toStartOf="@id/vLGuideline"
             app:layout_constraintTop_toTopOf="@id/hTGuideline" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
