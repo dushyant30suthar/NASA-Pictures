@@ -18,6 +18,7 @@ class CosmosImageListRVItemsMapper @Inject constructor() :
                 imageUrl = it.url,
                 imageTitle = it.title,
                 date = it.date,
+                imageDescription = it.explanation,
                 viewType = R.layout.item_cosmos_image
             )
         }

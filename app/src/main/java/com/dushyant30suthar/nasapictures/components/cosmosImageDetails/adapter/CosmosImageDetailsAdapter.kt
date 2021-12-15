@@ -6,11 +6,10 @@ import com.dushyant30suthar.nasapictures.base.adapter.BaseAdapter
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.components.cosmosImageDetails.actions.CosmosImageDetailsAction
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListViewHolderFactory
 
 class CosmosImageDetailsAdapter(
     private val actionPerformer: ActionPerformer<CosmosImageDetailsAction>?,
-    private val viewHolderFactory: CosmosImageListViewHolderFactory
+    private val viewHolderFactory: CosmosImageDetailsViewHolderFactory
 ) :
     BaseAdapter<CosmosImageDetailsAction>() {
 

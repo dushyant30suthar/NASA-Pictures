@@ -18,7 +18,7 @@ class CosmosImageDetailsViewHolderFactory : ViewHolderFactory<CosmosImageDetails
     ): BaseViewHolder<*, CosmosImageDetailsAction> {
         return when (viewType) {
 
-            R.layout.item_cosmos_image_details ->
+            R.layout.item_cosmos_image ->
 
                 CosmosImageDetailsItemViewHolder(
                     DataBindingUtil.inflate(

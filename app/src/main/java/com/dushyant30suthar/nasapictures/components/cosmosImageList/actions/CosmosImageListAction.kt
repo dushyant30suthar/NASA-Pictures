@@ -4,4 +4,4 @@ import com.dushyant30suthar.nasapictures.base.action.BaseAction
 
 interface CosmosImageListAction : BaseAction
 
-class CosmosImageSelectedAction : CosmosImageListAction
+class CosmosImageSelectedAction(val imageId: Int) : CosmosImageListAction

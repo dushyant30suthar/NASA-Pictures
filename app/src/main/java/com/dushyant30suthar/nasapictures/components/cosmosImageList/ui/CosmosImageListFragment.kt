@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dushyant30suthar.nasapictures.R
@@ -14,6 +15,7 @@ import com.dushyant30suthar.nasapictures.base.liveData.observeK
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
 import com.dushyant30suthar.nasapictures.base.viewModel.getViewModel
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageSelectedAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListViewHolderFactory
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.CosmosImageListViewModel
@@ -126,6 +128,11 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     }
 
     override fun performAction(action: CosmosImageListAction) {
+        when (action) {
+            is CosmosImageSelectedAction -> {
+                findNavController().navigate(R.id.action_cosmosImageListFragment_to_cosmosImageDetailsFragment)
+            }
+        }
     }
 
     private fun onCosmosImageListSuccess(cosmosImageList: List<RecyclerViewItem>) {

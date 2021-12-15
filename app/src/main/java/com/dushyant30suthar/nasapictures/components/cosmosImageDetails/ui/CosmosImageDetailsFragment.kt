@@ -14,9 +14,9 @@ import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.liveData.observeK
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
-import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListViewHolderFactory
+import com.dushyant30suthar.nasapictures.components.cosmosImageDetails.actions.CosmosImageDetailsAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageDetails.adapter.CosmosImageDetailsAdapter
+import com.dushyant30suthar.nasapictures.components.cosmosImageDetails.adapter.CosmosImageDetailsViewHolderFactory
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.viewModel.CosmosImageListViewModel
 import com.dushyant30suthar.nasapictures.components.loadState.LoadState
 import com.dushyant30suthar.nasapictures.components.loadState.LoadStateAdapter
@@ -24,7 +24,7 @@ import com.dushyant30suthar.nasapictures.databinding.FragmentCosmosImageDetailsB
 import javax.inject.Inject
 
 
-class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageListAction> {
+class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDetailsAction> {
 
     companion object {
         private val TAG: String =
@@ -38,10 +38,10 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageLi
 
     private lateinit var cosmosImageListViewModel: CosmosImageListViewModel
 
-    private val cosmosImageListViewHolderFactory = CosmosImageListViewHolderFactory()
+    private val cosmosImageListViewHolderFactory = CosmosImageDetailsViewHolderFactory()
 
-    private val cosmosImageListAdapter: CosmosImageListAdapter by lazy {
-        CosmosImageListAdapter(
+    private val cosmosImageListAdapter: CosmosImageDetailsAdapter by lazy {
+        CosmosImageDetailsAdapter(
             this,
             cosmosImageListViewHolderFactory
         )
@@ -131,7 +131,7 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageLi
         )
     }
 
-    override fun performAction(action: CosmosImageListAction) {
+    override fun performAction(action: CosmosImageDetailsAction) {
     }
 
     private fun onCosmosImageListSuccess(cosmosImageList: List<RecyclerViewItem>) {

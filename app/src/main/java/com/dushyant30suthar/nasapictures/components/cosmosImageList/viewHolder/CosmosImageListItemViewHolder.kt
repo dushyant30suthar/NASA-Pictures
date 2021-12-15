@@ -4,6 +4,7 @@ package com.dushyant30suthar.nasapictures.components.cosmosImageList.viewHolder
 import com.dushyant30suthar.nasapictures.base.view.BaseViewHolder
 import com.dushyant30suthar.nasapictures.base.viewModel.loadImage
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
+import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageSelectedAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.databinding.ItemCosmosImageBinding
 
@@ -21,6 +22,10 @@ class CosmosImageListItemViewHolder(
         binding.cosmosImageIV.loadImage(data.imageUrl)
         binding.cosmosImageTitleTV.text = data.imageTitle
         binding.cosmosImageDateTV.text = data.date
+
+        binding.root.setOnClickListener {
+            actionPerformer?.performAction(CosmosImageSelectedAction(position))
+        }
 
         binding.executePendingBindings()
     }
