@@ -15,6 +15,7 @@ import com.dushyant30suthar.nasapictures.base.BaseFragment
 import com.dushyant30suthar.nasapictures.base.action.ActionPerformer
 import com.dushyant30suthar.nasapictures.base.liveData.observeK
 import com.dushyant30suthar.nasapictures.base.view.RecyclerViewItem
+import com.dushyant30suthar.nasapictures.components.cosmosImageDetails.ui.CosmosImageDetailsFragment.Companion.IMAGE_ID
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageListAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.actions.CosmosImageSelectedAction
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.adapter.CosmosImageListAdapter
@@ -132,7 +133,11 @@ class CosmosImageListFragment : BaseFragment(), ActionPerformer<CosmosImageListA
     override fun performAction(action: CosmosImageListAction) {
         when (action) {
             is CosmosImageSelectedAction -> {
-                findNavController().navigate(R.id.action_cosmosImageListFragment_to_cosmosImageDetailsFragment)
+                findNavController().navigate(
+                    R.id.action_cosmosImageListFragment_to_cosmosImageDetailsFragment,
+                    Bundle().apply {
+                        putInt(IMAGE_ID, action.imageId)
+                    })
             }
         }
     }

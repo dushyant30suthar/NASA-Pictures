@@ -29,6 +29,7 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDe
     companion object {
         private val TAG: String =
             CosmosImageDetailsFragment::class.java.canonicalName ?: "UnknownClass"
+        const val IMAGE_ID = "IMAGE_ID"
     }
 
     private lateinit var binding: FragmentCosmosImageDetailsBinding
@@ -61,6 +62,8 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDe
         )
     }
 
+    private var selectedImageId: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,6 +80,8 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDe
 
         val cosmosImageListViewModel: CosmosImageListViewModel by navGraphViewModels(R.id.navigation_cosmos) { viewModelFactory }
         this.cosmosImageListViewModel = cosmosImageListViewModel
+
+        selectedImageId = arguments?.getInt(IMAGE_ID) ?: 0
 
         setUpViews()
     }
@@ -138,7 +143,7 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDe
         cosmosImageListLoadStateAdapter.loadState = LoadState.Success.HasItems()
         cosmosImageListAdapter.setItems(cosmosImageList)
         concatenatedCosmosImageListAndLoadStateAdapter.notifyDataSetChanged()
-        binding.cosmosImageListRV.scrollToPosition(0)
+        binding.cosmosImageListRV.scrollToPosition(selectedImageId)
     }
 
     private fun onCosmosImageListError(errorItem: RecyclerViewItem?) {
