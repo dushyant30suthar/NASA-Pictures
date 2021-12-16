@@ -1,5 +1,6 @@
 package com.dushyant30suthar.nasapictures
 
+import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 
 /**
@@ -11,5 +12,6 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
 
+        Schedulers.trampoline()
     }
 }
