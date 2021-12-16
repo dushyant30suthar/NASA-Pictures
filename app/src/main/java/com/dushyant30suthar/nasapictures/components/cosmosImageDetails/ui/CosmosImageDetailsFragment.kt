@@ -37,7 +37,7 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDe
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var cosmosImageListViewModel: CosmosImageListViewModel
+    private val cosmosImageListViewModel: CosmosImageListViewModel by navGraphViewModels(R.id.navigation_cosmos) { viewModelFactory }
 
     private val cosmosImageListViewHolderFactory = CosmosImageDetailsViewHolderFactory()
 
@@ -77,9 +77,6 @@ class CosmosImageDetailsFragment : BaseFragment(), ActionPerformer<CosmosImageDe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val cosmosImageListViewModel: CosmosImageListViewModel by navGraphViewModels(R.id.navigation_cosmos) { viewModelFactory }
-        this.cosmosImageListViewModel = cosmosImageListViewModel
 
         selectedImageId = arguments?.getInt(IMAGE_ID) ?: 0
 

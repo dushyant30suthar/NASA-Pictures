@@ -14,16 +14,13 @@ import com.dushyant30suthar.nasapictures.databinding.ActivityMainBinding
 * MainActivity/SingleActivity on which all application screens(Fragments/Views) relays on.*/
 class MainActivity : AppCompatActivity() {
 
-    /*
-    * This project uses ViewBinding not the whole DataBinding stuff. */
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         /*
         * Let the viewBinding do it's stuff.*/
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
