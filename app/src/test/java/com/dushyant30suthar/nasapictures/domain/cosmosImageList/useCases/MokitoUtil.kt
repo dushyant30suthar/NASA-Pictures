@@ -4,14 +4,11 @@ import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
 import org.mockito.Mockito
-import org.mockito.Mockito.RETURNS_DEEP_STUBS
 import org.mockito.stubbing.OngoingStubbing
 import java.util.*
 import kotlin.collections.ArrayList
 
 const val LIMIT_COSMOS_IMAGE_LIST = 5
-
-inline fun <reified T> mock() = Mockito.mock(T::class.java, RETURNS_DEEP_STUBS)
 
 inline fun <T> whenever(methodCall: T): OngoingStubbing<T> =
     Mockito.`when`(methodCall)

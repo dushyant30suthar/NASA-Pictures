@@ -29,7 +29,7 @@ class GetCosmosImageListUseCaseTest {
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    var cosmosService: CosmosService? = null
+    lateinit var cosmosService: CosmosService
 
     private lateinit var cosmosImageListRepository: CosmosImageListRepository
 
@@ -43,7 +43,7 @@ class GetCosmosImageListUseCaseTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        cosmosImageListRepository = Mockito.spy(CosmosImageListRepository(cosmosService!!))
+        cosmosImageListRepository = Mockito.spy(CosmosImageListRepository(cosmosService))
     }
 
 
