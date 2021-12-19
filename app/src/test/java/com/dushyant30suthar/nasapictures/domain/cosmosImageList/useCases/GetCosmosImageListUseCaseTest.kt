@@ -1,8 +1,15 @@
 package com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dushyant30suthar.nasapictures.data.cosmosImageList.repository.CosmosImageListRepository
+import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.CosmosService
 import io.reactivex.Single
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 
 
 /*
@@ -17,14 +24,28 @@ import org.junit.Test
 
 class GetCosmosImageListUseCaseTest {
 
+    @Rule
+    @JvmField
+    val rule = InstantTaskExecutorRule()
 
-    private val cosmosImageListRepository = mock<CosmosImageListRepository>()
+    @Mock
+    var cosmosService: CosmosService? = null
+
+    private lateinit var cosmosImageListRepository: CosmosImageListRepository
 
     private val getCosmosImageListUseCase by lazy {
         GetCosmosImageListUseCase(
             cosmosImageListRepository
         )
     }
+
+
+    @Before
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+        cosmosImageListRepository = Mockito.spy(CosmosImageListRepository(cosmosService!!))
+    }
+
 
     @Test
     fun testGetCosmosImageListUseCase_Completed() {
