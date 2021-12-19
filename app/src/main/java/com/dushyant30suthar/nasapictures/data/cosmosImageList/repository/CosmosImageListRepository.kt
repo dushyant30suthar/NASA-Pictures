@@ -5,7 +5,7 @@ import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosI
 import io.reactivex.Single
 import javax.inject.Inject
 
-class CosmosImageListRepository @Inject constructor(
+open class CosmosImageListRepository @Inject constructor(
     private val cosmosService: CosmosService
 ) {
     fun getCosmosImageList(): Single<List<CosmosImageEntity>> {

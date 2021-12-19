@@ -1,16 +1,8 @@
 package com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases
 
-import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.CosmosService
-import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subscribers.TestSubscriber
-import org.junit.Assert.assertEquals
+import com.dushyant30suthar.nasapictures.data.cosmosImageList.repository.CosmosImageListRepository
+import io.reactivex.Single
 import org.junit.Test
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.mock.Calls
-import retrofit2.mock.MockRetrofit
 
 
 /*
@@ -26,39 +18,51 @@ import retrofit2.mock.MockRetrofit
 class GetCosmosImageListUseCaseTest {
 
 
-    private val retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .baseUrl("https://www.google.com").build()
-    private val mockRetrofit = MockRetrofit.Builder(retrofit).build()
-    val cosmosService = mockRetrofit.create(CosmosService::class.java)
+    private val cosmosImageListRepository = mock<CosmosImageListRepository>()
+
+    private val getCosmosImageListUseCase by lazy {
+        GetCosmosImageListUseCase(
+            cosmosImageListRepository
+        )
+    }
 
     @Test
-    fun execute() {
+    fun testGetCosmosImageListUseCase_Completed() {
 
-        val subscriber = TestSubscriber<List<CosmosImageEntity>>()
+        whenever(cosmosImageListRepository.getCosmosImageList())
+            .thenReturn(Single.just(emptyList()))
 
-        val response = Calls.response(getExpectedResponse())
-
-        cosmosService.returningResponse(Calls.response(getExpectedResponse()).execute().body())
-            .getCosmosImageList()
-            .observeOn(Schedulers.trampoline())
-            .subscribeOn(Schedulers.trampoline())
-            .subscribe({ assert(true) }, { assert(false) })
+        getCosmosImageListUseCase.execute(Unit)
+            .test()
+            .assertComplete()
     }
 
-    private fun onCosmosImageListSuccess(it: List<CosmosImageEntity>) {
-        assertEquals(26, it.size)
+    @Test
+    fun testGetCosmosImageListUseCase_Error() {
+
+        val response = Throwable("Error response")
+        whenever(cosmosImageListRepository.getCosmosImageList())
+            .thenReturn(Single.error(response))
+
+        getCosmosImageListUseCase.execute(Unit)
+            .test()
+            .assertError(response)
+
     }
 
-    private fun onCosmosImageListError(e: Throwable) {
+    @Test
+    fun testGetCosmosImageListUseCase_Response() {
+        val response = arrayListOf(cosmosImageEntity())
 
-    }
+        val expectedList = arrayListOf(cosmosImageEntity())
+
+        whenever(cosmosImageListRepository.getCosmosImageList())
+            .thenReturn(Single.just(response))
 
 
-    private fun getExpectedResponse(): String {
-        return GetCosmosImageListUseCaseTest::class.java.getResourceAsStream("response.txt")
-            .bufferedReader().use { it.readText() }
+        getCosmosImageListUseCase.execute(Unit)
+            .test()
+            .assertValue(expectedList)
     }
 
 }
