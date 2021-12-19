@@ -1,35 +1,38 @@
 package com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dushyant30suthar.nasapictures.data.cosmosImageList.repository.CosmosImageListRepository
 import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.CosmosService
-import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 /*
 * I never ever wrote test cases in production. Having hard time getting into this as I couldn't collect much about
 * structuring or a system to call it as a TestSystem.
 *
-* I just assume there would be some configuration classes which would get me the unMocked version of classes
-* upon which we can perform operations.
+* I just assume there would be some configuration classes which could get me the unMocked version of classes
+* upon which we can perform operations. For example we are not using the retrofit configuration that we just have
+* in our main code. We are testing use case not the actual code.
 *
 * Writing standalone methods doesn't really feels good. But anyways this is what I could collect
-* as understandings within hours.*/
+* as understandings.*/
 
 class GetCosmosImageListUseCaseTest {
 
-    @Rule
-    @JvmField
-    val rule = InstantTaskExecutorRule()
+    @get:Rule
+    val mockWebServer = MockWebServer()
 
-    @Mock
-    lateinit var cosmosService: CosmosService
+    private var cosmosService: CosmosService? = null
 
     private lateinit var cosmosImageListRepository: CosmosImageListRepository
 
@@ -39,51 +42,94 @@ class GetCosmosImageListUseCaseTest {
         )
     }
 
-
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
-        cosmosImageListRepository = Mockito.spy(CosmosImageListRepository(cosmosService))
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.SECONDS)
+            .readTimeout(1, TimeUnit.SECONDS)
+            .writeTimeout(1, TimeUnit.SECONDS)
+            .build()
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+        cosmosService = retrofit.create(CosmosService::class.java)
+        cosmosImageListRepository = CosmosImageListRepository(cosmosService!!)
+    }
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun `should fetch cosmosImageList correctly`() {
+        mockWebServer.enqueue(MockResponse().setBody(getResponse()))
+
+        val expectedResponse = listOf(cosmosImageEntity())
+
+        getCosmosImageListUseCase.execute(Unit)
+            .observeOn(Schedulers.trampoline())
+            .subscribeOn(Schedulers.trampoline())
+            .test()
+            .assertValue(expectedResponse)
+        /*.subscribe(
+            { response ->
+
+                assertEquals(expectedResponse.toString(), response.toString())
+            },
+            { exception ->
+                when (exception) {
+                    is HttpException -> assertThrows(HttpException::class.java) { throw exception }
+                    is JsonSyntaxException -> assertThrows(HttpException::class.java) { throw exception }
+                }
+            })*/
+
+        val request = mockWebServer.takeRequest()
+
+        /*
+        * By using request object,
+        * Here we can print the parameter that we have received from the client.*/
     }
 
 
     @Test
-    fun testGetCosmosImageListUseCase_Completed() {
+    fun `should give cosmosImageList correctly`() {
+        mockWebServer.enqueue(MockResponse().setBody(getResponse()))
 
-        whenever(cosmosImageListRepository.getCosmosImageList())
-            .thenReturn(Single.just(emptyList()))
+        val expectedResponse = listOf(cosmosImageEntity())
 
         getCosmosImageListUseCase.execute(Unit)
+            .observeOn(Schedulers.trampoline())
+            .subscribeOn(Schedulers.trampoline())
             .test()
-            .assertComplete()
+            .assertValue(expectedResponse)
+        /*.subscribe(
+            { response ->
+
+                assertEquals(expectedResponse.toString(), response.toString())
+            },
+            { exception ->
+                when (exception) {
+                    is HttpException -> assertThrows(HttpException::class.java) { throw exception }
+                    is JsonSyntaxException -> assertThrows(HttpException::class.java) { throw exception }
+                }
+            })*/
+
+        val request = mockWebServer.takeRequest()
+
+        /*
+        * By using request object,
+        * Here we can print the parameter that we have received from the client.*/
     }
 
-    @Test
-    fun testGetCosmosImageListUseCase_Error() {
 
-        val response = Throwable("Error response")
-        whenever(cosmosImageListRepository.getCosmosImageList())
-            .thenReturn(Single.error(response))
-
-        getCosmosImageListUseCase.execute(Unit)
-            .test()
-            .assertError(response)
-
-    }
-
-    @Test
-    fun testGetCosmosImageListUseCase_Response() {
-        val response = arrayListOf(cosmosImageEntity())
-
-        val expectedList = arrayListOf(cosmosImageEntity())
-
-        whenever(cosmosImageListRepository.getCosmosImageList())
-            .thenReturn(Single.just(response))
-
-
-        getCosmosImageListUseCase.execute(Unit)
-            .test()
-            .assertValue(expectedList)
+    private fun getResponse(): String {
+        return GetCosmosImageListUseCaseTest::class.java.getResourceAsStream("response.txt")
+            .bufferedReader().use { it.readText() }
     }
 
 }
