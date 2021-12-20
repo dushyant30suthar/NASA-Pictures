@@ -2,6 +2,15 @@ package com.dushyant30suthar.nasapictures
 
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
+import org.mockito.Mockito
+import org.mockito.stubbing.OngoingStubbing
+
+
+inline fun <reified T> mock() = Mockito.mock(T::class.java)
+
+inline fun <T> whenever(methodCall: T): OngoingStubbing<T> =
+    Mockito.`when`(methodCall)
+
 
 fun cosmosImageEntity() =
     CosmosImageEntity(
