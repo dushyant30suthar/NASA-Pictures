@@ -65,9 +65,11 @@ class GetCosmosImageListUseCaseTest {
         mockWebServer.shutdown()
     }
 
+    /*
+    * This test represents that nonNull Values are getting parsed correctly.*/
     @Test
     fun `should fetch cosmosImageList correctly`() {
-        mockWebServer.enqueue(MockResponse().setBody(getResponse()))
+        mockWebServer.enqueue(MockResponse().setBody(getResponse("response")))
 
         val expectedResponse = listOf(cosmosImageEntity())
 
@@ -76,17 +78,7 @@ class GetCosmosImageListUseCaseTest {
             .subscribeOn(Schedulers.trampoline())
             .test()
             .assertValue(expectedResponse)
-        /*.subscribe(
-            { response ->
 
-                assertEquals(expectedResponse.toString(), response.toString())
-            },
-            { exception ->
-                when (exception) {
-                    is HttpException -> assertThrows(HttpException::class.java) { throw exception }
-                    is JsonSyntaxException -> assertThrows(HttpException::class.java) { throw exception }
-                }
-            })*/
 
         val request = mockWebServer.takeRequest()
 
@@ -97,10 +89,10 @@ class GetCosmosImageListUseCaseTest {
 
 
     @Test
-    fun `should give cosmosImageList correctly`() {
-        mockWebServer.enqueue(MockResponse().setBody(getResponse()))
+    fun `should give cosmosImageList correctly even though some values are null`() {
+        mockWebServer.enqueue(MockResponse().setBody(getResponse("response_with_null_values")))
 
-        val expectedResponse = listOf(cosmosImageEntity())
+        val expectedResponse = listOf(cosmosImageEntityWithEmptyValues())
 
         getCosmosImageListUseCase.execute(Unit)
             .observeOn(Schedulers.trampoline())
@@ -127,8 +119,8 @@ class GetCosmosImageListUseCaseTest {
     }
 
 
-    private fun getResponse(): String {
-        return GetCosmosImageListUseCaseTest::class.java.getResourceAsStream("response.txt")
+    private fun getResponse(fileName: String): String {
+        return GetCosmosImageListUseCaseTest::class.java.getResourceAsStream("$fileName.txt")
             .bufferedReader().use { it.readText() }
     }
 
