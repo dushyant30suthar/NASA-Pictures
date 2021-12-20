@@ -55,13 +55,6 @@
                 app:layout_constraintTop_toTopOf="@id/hTGuideline"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/h1Guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.7" />
-
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -69,7 +62,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/cosmosImageIV"
                 app:layout_constraintEnd_toEndOf="@id/vRGuideline"
                 app:layout_constraintStart_toStartOf="@id/vLGuideline"
-                app:layout_constraintTop_toTopOf="@id/h1Guideline" />
+                app:layout_constraintTop_toTopOf="@id/cosmosImageTitleTV" />
 
             <TextView
                 android:id="@+id/cosmosImageTitleTV"
