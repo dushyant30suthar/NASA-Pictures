@@ -1,26 +1,7 @@
-package com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases
+package com.dushyant30suthar.nasapictures
 
-import com.dushyant30suthar.nasapictures.R
 import com.dushyant30suthar.nasapictures.components.cosmosImageList.models.CosmosImageModel
 import com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities.CosmosImageEntity
-import org.mockito.Mockito
-import org.mockito.stubbing.OngoingStubbing
-import java.util.*
-import kotlin.collections.ArrayList
-
-const val LIMIT_COSMOS_IMAGE_LIST = 5
-
-inline fun <T> whenever(methodCall: T): OngoingStubbing<T> =
-    Mockito.`when`(methodCall)
-
-fun limitCosmosImageListSizeArrayEmptyCosmosImageModel() =
-    ArrayList<CosmosImageModel>(
-        Collections.nCopies(
-            LIMIT_COSMOS_IMAGE_LIST, cosmosImageModelFrom(
-                cosmosImageEntity()
-            )
-        )
-    )
 
 fun cosmosImageEntity() =
     CosmosImageEntity(
@@ -47,11 +28,13 @@ fun cosmosImageEntityWithEmptyValues() =
         url = "https://apod.nasa.gov/apod/image/1912/M94_Hubble_960.jpg"
     )
 
-fun cosmosImageModelFrom(cosmosImageEntity: CosmosImageEntity) =
-    CosmosImageModel(
-        imageUrl = cosmosImageEntity.url,
-        imageTitle = cosmosImageEntity.title,
-        imageDescription = cosmosImageEntity.explanation,
-        date = cosmosImageEntity.date,
-        viewType = R.layout.item_cosmos_image
-    )
+fun cosmosImageModelListFromEntityList(cosmosImageEntityList: List<CosmosImageEntity>) =
+    cosmosImageEntityList.map {
+        CosmosImageModel(
+            imageUrl = it.url,
+            imageTitle = it.title,
+            date = it.date,
+            imageDescription = it.explanation,
+            viewType = R.layout.item_cosmos_image
+        )
+    }

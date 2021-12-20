@@ -1,5 +1,7 @@
 package com.dushyant30suthar.nasapictures.domain.cosmosImageList.useCases
 
+import com.dushyant30suthar.nasapictures.cosmosImageEntity
+import com.dushyant30suthar.nasapictures.cosmosImageEntityWithEmptyValues
 import com.dushyant30suthar.nasapictures.data.cosmosImageList.repository.CosmosImageListRepository
 import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.CosmosService
 import io.reactivex.schedulers.Schedulers
