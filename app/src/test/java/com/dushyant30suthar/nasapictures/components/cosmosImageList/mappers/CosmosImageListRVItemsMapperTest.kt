@@ -1,6 +1,7 @@
 package com.dushyant30suthar.nasapictures.components.cosmosImageList.mappers
 
 import com.dushyant30suthar.nasapictures.cosmosImageEntity
+import com.dushyant30suthar.nasapictures.cosmosImageEntityWithEmptyValues
 import com.dushyant30suthar.nasapictures.cosmosImageModelListFromEntityList
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -17,6 +18,21 @@ class CosmosImageListRVItemsMapperTest {
         val responseEntities = listOf(cosmosImageEntity())
 
         val expectedEntities = cosmosImageModelListFromEntityList(listOf(cosmosImageEntity()))
+
+        val resultModels = mapper.map(responseEntities)
+
+        assertEquals(expectedEntities, resultModels)
+
+    }
+
+
+    @Test
+    fun `should map cosmosImageEntity to cosmosImageModel correctly event with empty values`() {
+
+        val responseEntities = listOf(cosmosImageEntityWithEmptyValues())
+
+        val expectedEntities =
+            cosmosImageModelListFromEntityList(listOf(cosmosImageEntityWithEmptyValues()))
 
         val resultModels = mapper.map(responseEntities)
 
