@@ -5,6 +5,7 @@ import android.content.Context
 import com.dushyant30suthar.nasapictures.BuildConfig
 import com.dushyant30suthar.nasapictures.configuration.dagger.annotations.ApplicationContext
 import com.dushyant30suthar.nasapictures.configuration.network.RawResponseInterceptor
+import com.dushyant30suthar.nasapictures.data.cosmosImageList.services.CosmosDataStorage
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -68,4 +69,11 @@ object ApplicationModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideCosmosDataStorage(): CosmosDataStorage {
+        return CosmosDataStorage()
+    }
+
 }
