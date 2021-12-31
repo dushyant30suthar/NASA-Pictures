@@ -3,7 +3,12 @@ package com.dushyant30suthar.nasapictures.domain.cosmosImageList.entities
 
 import com.google.gson.annotations.SerializedName
 
+/*
+* Image is one picture a day. */
 data class CosmosImageEntity(
+
+    /*
+    * Bound to be a unique. Treating it as an id.*/
     @SerializedName("date")
     val date: String = "",
     @SerializedName("copyright")
@@ -19,7 +24,12 @@ data class CosmosImageEntity(
     @SerializedName("title")
     val title: String = "",
     @SerializedName("url")
-    val url: String = ""
+    val url: String = "",
+
+
+    /*
+    * Ignore parsing. */
+    val isBookmarked: Boolean
 )
 
 
