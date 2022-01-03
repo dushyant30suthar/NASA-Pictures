@@ -26,6 +26,8 @@ data class CosmosImageEntity(
     @SerializedName("url")
     val url: String = "",
 
+    val id: String = date,
+
 
     /*
     * Ignore parsing. */

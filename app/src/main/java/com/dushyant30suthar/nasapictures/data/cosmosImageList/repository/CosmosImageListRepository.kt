@@ -16,6 +16,6 @@ open class CosmosImageListRepository @Inject constructor(
     }
 
     fun bookCosmosImage(imageId: String) {
-        cosmosDataStorage.bookmarkCosmosImage(imageId)
+        cosmosDataStorage.toggleCosmosImageBookmark(imageId)
     }
 }
