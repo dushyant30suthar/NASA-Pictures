@@ -1,13 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = '1.6.0'
+    ext.kotlin_version = '1.6.10'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,13 +15,13 @@ buildscript {
     ext {
 
         androidx_version = '1.2.1'
-        constraint_layout_version = '2.1.2'
-        navigation_version = '2.3.5'
-        paging_version = '3.1.0'
-        lifecycle_version = '2.4.0'
+        constraint_layout_version = '2.1.3'
+        navigation_version = '2.4.2'
+        paging_version = '3.1.1'
+        lifecycle_version = '2.4.1'
         retrofit2_version = "2.9.0"
         retrofit_logging_version = "4.8.0"
-        okhttp3_version = "4.8.0"
+        okhttp3_version = "4.9.0"
         dagger_version = "2.40.5"
         gson_version = "2.8.9"
         rxjava2_version = "2.2.21"
